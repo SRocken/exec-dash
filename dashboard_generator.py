@@ -107,11 +107,18 @@ dashboard_title = ("Top Selling Products: " + month_name + " " + raw_year)
 #plt.ylabel('Product')
 #plt.show()
 
-fig = plt.figure()
-ax = fig.add_axes([0,0,1,1])
-ax.axis('equal')
-ax.pie(plotted_sales, labels = plotted_products, autopct='%1.2f%%')
+#fig = plt.figure()
+#ax = fig.add_axes([0,0,1,1])
+#ax.axis('equal')
+#ax.pie(plotted_sales, labels = plotted_products, autopct='%1.2f%%')
+#plt.show()
+
+plt.figure(figsize=(9, 3))
+
+plt.subplot(131)
+plt.barh(plotted_products, plotted_sales)
+plt.subplot(132)
+plt.pie(plotted_sales, labels = plotted_products, autopct='%1.2f%%')
+plt.suptitle(dashboard_title)
 plt.show()
-
-
 
