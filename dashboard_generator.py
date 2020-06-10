@@ -5,8 +5,9 @@
 import operator
 import pandas as pd
 import os
-import matplotlib.pyplot as plt
 from datetime import datetime
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 
 # Module - all answers must be in USD format with $ and .00
 def to_usd(my_price):
@@ -89,7 +90,7 @@ for p in top_sellers:
           p["name"] + ": " + to_usd(p["monthly_sales"]))
     rank = rank + 1
 
-#TODO: Build out the data viz!
+#Viz Time!
 print("-----------------------")
 print("VISUALIZING THE DATA...")
 
@@ -101,12 +102,17 @@ for p in top_sellers:
 
 dashboard_title = ("Top Selling Products: " + month_name + " " + raw_year)
 
-plt.figure(figsize=(8, 6))
-plt.bar(plotted_products, plotted_sales)
-plt.title(dashboard_title)
-plt.xlabel('Product')
-plt.ylabel('Monthly Sales (USD)')
-plt.show()
+#fig, ax = plt.subplots()
+#ax.barh(plotted_products, plotted_sales)
+#ax.set_xlabel('Sales (USD)')
+#ax.set_ylabel('Product')
+#ax.set_title(dashboard_title)
+#plt.show()
 
-#plt.bar(plotted_products, plotted_sales)
+plt.barh(plotted_products, plotted_sales)
+plt.title(dashboard_title)
+plt.xlim(0, max(plotted_sales))
+plt.xlabel('Sales (USD)')
+plt.ylabel('Product')
+plt.show()
 
