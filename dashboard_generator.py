@@ -47,9 +47,9 @@ csv_filepath = os.path.join(os.path.dirname(__file__), "data", "monthly-sales", 
 data = pd.read_csv(csv_filepath)
 
 #TODO: Fill in the month based on the file selection, not hardcoded
-month_name = datetime(2020, int_month, 1).strftime('%B').upper()
+month_name = datetime(2020, int_month, 1).strftime('%B')
 print("-----------------------")
-print("SALES REPORT FOR " + month_name + " " + raw_year)
+print("SALES REPORT FOR " + month_name.upper() + " " + raw_year)
 print("-----------------------")
 print("CRUNCHING THE DATA...")
 
@@ -92,3 +92,21 @@ for p in top_sellers:
 #TODO: Build out the data viz!
 print("-----------------------")
 print("VISUALIZING THE DATA...")
+
+plotted_products = []
+plotted_sales = []
+for p in top_sellers:
+    plotted_products.append(p["name"])
+    plotted_sales.append(p["monthly_sales"])
+
+dashboard_title = ("Top Selling Products: " + month_name + " " + raw_year)
+
+plt.figure(figsize=(8, 6))
+plt.bar(plotted_products, plotted_sales)
+plt.title(dashboard_title)
+plt.xlabel('Product')
+plt.ylabel('Monthly Sales (USD)')
+plt.show()
+
+#plt.bar(plotted_products, plotted_sales)
+
