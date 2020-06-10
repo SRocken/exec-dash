@@ -55,14 +55,11 @@ print("-----------------------")
 print("CRUNCHING THE DATA...")
 
 # Print out the total sales by converting csv data into a dict and building a for loop that sums all sales
-sales = data.to_dict("records")
-total_monthly_sales = 0
-for x in sales:
-    total_monthly_sales = total_monthly_sales + x["sales price"]
-total_monthly_sales = to_usd(total_monthly_sales)
+total_monthly_sales = data["sales price"].sum()
+usd_monthly_sales = to_usd(total_monthly_sales)
 
 print("-----------------------")
-print("TOTAL MONTHLY SALES: " + str(total_monthly_sales))
+print("TOTAL MONTHLY SALES: " + str(usd_monthly_sales))
 
 # Identify and print the top selling products
 # Step 1: Pull out the unique products
@@ -102,17 +99,19 @@ for p in top_sellers:
 
 dashboard_title = ("Top Selling Products: " + month_name + " " + raw_year)
 
-#fig, ax = plt.subplots()
-#ax.barh(plotted_products, plotted_sales)
-#ax.set_xlabel('Sales (USD)')
-#ax.set_ylabel('Product')
-#ax.set_title(dashboard_title)
+#TODO: X axis is backwards, need to fix
+#plt.barh(plotted_products, plotted_sales)
+#plt.title(dashboard_title)
+#plt.xlim(0, max(plotted_sales))
+#plt.xlabel('Sales (USD)')
+#plt.ylabel('Product')
 #plt.show()
 
-plt.barh(plotted_products, plotted_sales)
-plt.title(dashboard_title)
-plt.xlim(0, max(plotted_sales))
-plt.xlabel('Sales (USD)')
-plt.ylabel('Product')
+fig = plt.figure()
+ax = fig.add_axes([0,0,1,1])
+ax.axis('equal')
+ax.pie(plotted_sales, labels = plotted_products, autopct='%1.2f%%')
 plt.show()
+
+
 
