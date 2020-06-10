@@ -99,26 +99,20 @@ for p in top_sellers:
 
 dashboard_title = ("Top Selling Products: " + month_name + " " + raw_year)
 
-#TODO: X axis is backwards, need to fix
-#plt.barh(plotted_products, plotted_sales)
-#plt.title(dashboard_title)
-#plt.xlim(0, max(plotted_sales))
-#plt.xlabel('Sales (USD)')
-#plt.ylabel('Product')
-#plt.show()
-
-#fig = plt.figure()
-#ax = fig.add_axes([0,0,1,1])
-#ax.axis('equal')
-#ax.pie(plotted_sales, labels = plotted_products, autopct='%1.2f%%')
-#plt.show()
-
-plt.figure(figsize=(9, 3))
-
+#TODO: Change to USD, add numbers to bars
+plt.figure()
 plt.subplot(131)
-plt.barh(plotted_products, plotted_sales)
-plt.subplot(132)
+plt.barh(plotted_products, plotted_sales, align='center')
+plt.ylabel('Products')
+plt.xlabel('Sales (USD)')
+
+plt.subplot(133)
 plt.pie(plotted_sales, labels = plotted_products, autopct='%1.2f%%')
+
 plt.suptitle(dashboard_title)
 plt.show()
+
+
+
+
 
