@@ -8,6 +8,7 @@ import os
 from datetime import datetime
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+import matplotlib.ticker as ticker
 
 # Module - all answers must be in USD format with $ and .00
 def to_usd(my_price):
@@ -100,19 +101,35 @@ for p in top_sellers:
 dashboard_title = ("Top Selling Products: " + month_name + " " + raw_year)
 
 #TODO: Change to USD, add numbers to bars
-plt.figure()
-plt.subplot(131)
-plt.barh(plotted_products, plotted_sales, align='center')
-plt.ylabel('Products')
-plt.xlabel('Sales (USD)')
+fig = plt.figure(constrained_layout=True)
+spec = gridspec.GridSpec(ncols=1, nrows=2, figure=fig)
 
-plt.subplot(133)
-plt.pie(plotted_sales, labels = plotted_products, autopct='%1.2f%%')
+# Horizontal Bar Chart
+ax1 = fig.add_subplot(spec[0,0])
+ax1.barh(plotted_products, plotted_sales, color='seagreen', align='center')
+# Y Axis
+ax1.set_ylabel('Products')
+ax1.set_yticklabels(plotted_products)
+ax1.invert_yaxis()
+# X Axis
+formatter = ticker.FormatStrFormatter('$%1.0f')
+ax1.xaxis.set_major_formatter(formatter)
+ax1.set_xlabel('Sales (USD)')
+ax1.set_xlim(right=10000)
+# Values on Bars
+for i, v in enumerate(plotted_sales):
+    ax1.text(v, i, str(to_usd(v)), color='black', va='center', fontsize=8)
+
+#ax1.text(plotted_products, plotted_sales, ha='center', va='center',
+#        color='white')
+
+# Pie Chart
+ax2 = fig.add_subplot(spec[1,0])
+ax2.pie(plotted_sales, autopct='%1.2f%%', textprops={'size': 'smaller', 'color': 'white'})
+ax2.legend(plotted_products,
+        title="Products",
+        loc="center left",
+        bbox_to_anchor=(1, 0, 0.5, 1))
 
 plt.suptitle(dashboard_title)
 plt.show()
-
-
-
-
-
