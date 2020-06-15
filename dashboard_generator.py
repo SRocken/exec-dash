@@ -15,7 +15,7 @@ def to_usd(my_price):
     return "${0:,.2f}".format(my_price)
 
 #Prompt User to enter Month and Year of Report they are seeking, and then establish file path to connect to that specific CSV 
-raw_year = input("Enter Year (YYYY): ")
+raw_year = input("Enter Year (YYYY format): ")
 int_year = int(raw_year)
 current_year = datetime.today().year # For real world application with up-to-date CSV files
 while int_year < 2017 or int_year > 2019: # If in real world, would change 2019 to current_year variable defined above
@@ -41,7 +41,7 @@ while int_month > 12 or int_year == 2017 and int_month < 10 or int_year == 2019 
     print("At this time we only have access to data from October 2017 through April 2019.")
     print("Please input a different MONTH to try again.")
     print("-----------------------")
-    raw_month = input("Enter Month (MM): ")
+    raw_month = input("Enter Month (MM format): ")
     int_month = int(raw_month)
 else:
     pass
