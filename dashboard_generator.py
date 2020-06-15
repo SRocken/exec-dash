@@ -17,27 +17,28 @@ def to_usd(my_price):
 #Prompt User to enter Month and Year of Report they are seeking, and then establish file path to connect to that specific CSV 
 raw_year = input("Enter Year (YYYY): ")
 int_year = int(raw_year)
-current_year = datetime.today().year
-while int_year < 2017 or int_year > current_year:
+current_year = datetime.today().year # For real world application with up-to-date CSV files
+while int_year < 2017 or int_year > 2019: # If in real world, would change 2019 to current_year variable defined above
     print("-----------------------")
     print("Thanks for using the Monthly Sales Dashboard!")
     print("It looks like you tried generating a Dashboard for a YEAR that we do not have data for.")
-    print("At this time we only have access to data from October of 2017 through the previous month.")
+    print("At this time we only have access to data from October 2017 through April 2019.")
     print("Please input a different YEAR to try again.")
     print("-----------------------")
-    raw_year = input("Enter Year (YYYY): ")
+    raw_year = input("Enter Year (YYYY format): ")
     int_year = int(raw_year)
 else:
     pass
     
-raw_month = input("Enter Month (MM): ")
+raw_month = input("Enter Month (MM format): ")
 int_month = int(raw_month)
-current_month = datetime.today().month
-while int_month > 12 or int_year == 2017 and int_month < 10 or int_year == current_year and int_month >= current_month:
+current_month = datetime.today().month # For real world application with up-to-date CSV files (see line 37 for appropriate while loop)
+#while int_month > 12 or int_year == 2017 and int_month < 10 or int_year == current_year and int_month >= current_month:
+while int_month > 12 or int_year == 2017 and int_month < 10 or int_year == 2019 and int_month > 4:
     print("-----------------------")
     print("Thanks for using the Monthly Sales Dashboard!")
     print("It looks like you tried generating a Dashboard for a MONTH that we do not have data for.")
-    print("At this time we only have access to data from October of 2017 through the previous month.")
+    print("At this time we only have access to data from October 2017 through April 2019.")
     print("Please input a different MONTH to try again.")
     print("-----------------------")
     raw_month = input("Enter Month (MM): ")
